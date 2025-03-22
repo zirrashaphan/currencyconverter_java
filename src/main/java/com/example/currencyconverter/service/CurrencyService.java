@@ -1,3 +1,4 @@
+
 package com.example.currencyconverter.service;
 
 import org.slf4j.Logger;
@@ -7,6 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import java.util.Map;
 
+/**
+ * Service class handling currency conversion operations
+ * Uses ExchangeRate API to fetch current exchange rates
+ */
 @Service
 public class CurrencyService {
     private static final String API_URL = "https://api.exchangerate-api.com/v4/latest/";
@@ -18,6 +23,14 @@ public class CurrencyService {
         this.restTemplate = restTemplate;
     }
 
+    /**
+     * Converts an amount from one currency to another
+     * @param from Source currency code
+     * @param to Target currency code
+     * @param amount Amount to convert
+     * @return Converted amount in target currency
+     * @throws RuntimeException if conversion fails
+     */
     public double convert(String from, String to, double amount) {
         String url = API_URL + from;
         logger.info("Fetching exchange rates from: {}", url);
